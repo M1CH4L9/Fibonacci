@@ -1,6 +1,25 @@
 import time
 import math
 
+#nie używam, bo to to samo co fib_iter, tylkogorsza złożoność pamięciowej
+#czas - O(n)
+#pamięć - O(n)
+def fib_list(n):
+    if n == 0: return 0
+    if n == 1: return 1
+    
+    F = [0] * (n + 1)
+    
+    F[0] = 0
+    F[1] = 1
+    
+    for i in range(2, n + 1):
+        F[i] = F[i-1] + F[i-2]
+        
+    return F[n]
+
+#czas - O(n)
+#pamięć - O(1)
 def fib_iter(n):
     if n == 0: return 0
     if n == 1: return 1
@@ -28,7 +47,9 @@ def potega_macierzy(M, n):
     else:
         reszta = potega_macierzy(M, n - 1)
         return mnozenie_macierzy(M, reszta)
-    
+
+#czas - O(log n)
+#pamięć - O(1)
 def fib_matrix(n):
     if n == 0: return 0
     if n == 1: return 1
@@ -39,6 +60,8 @@ def fib_matrix(n):
 
     return WynikMacierz[0][1]
 
+#czas - O(1)
+#pamięć - O(1)
 def fib_binet(n):
     pierwiastek_z_5 = math.sqrt(5)
     phi = (1 + pierwiastek_z_5) / 2
@@ -90,4 +113,5 @@ if __name__ == "__main__":
             print("Błąd: Wzór Bineta dał zły wynik (problem precyzji float) (za duża luczba)")
     except OverflowError:
         print("[Wzór Bineta] Błąd: Liczba jest zbyt duża dla typu float")
+
 
