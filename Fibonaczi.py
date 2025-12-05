@@ -50,10 +50,10 @@ if __name__ == "__main__":
     try:
         n_input = int(input("Podaj numer wyrazu ciągu Fibonacciego (n): "))
     except ValueError:
-        print("Proszę podać poprawną liczbę całkowitą.")
+        print("Złe value. Podaj poprawną liczbę całkowitą")
         exit()
 
-    print(f"\nObliczam {n_input}-ty wyraz ciągu trzema metodami...\n")
+    print(f"\nObliczamy {n_input}-ty wyraz ciągu fibonaczjego\n")
 
     start = time.perf_counter()
     wynik_iter = fib_iter(n_input)
@@ -71,15 +71,18 @@ if __name__ == "__main__":
     print(f"Czas wykonania: {czas_matrix:.10f} sekund\n")
 
     if(czas_matrix < czas_iter):
-        print(">> Metoda macierzowa była szybsza")
+        print("Macierz była szybsza od itera")
     else:
-        print(">> Dla małych 'n' czasy są podobne, różnicę widać przy n > 10 000")
+        print("Iter był szybszy od macierzy")
     print("-" * 40)
 
-    wynik_binet = fib_binet(n_input)
-    print(f"[Wzór Binet'a] Wynik: {wynik_binet}")
-
-    if(wynik_binet == wynik_matrix):
-        print(">> Wzór Binet'a jest poprawny.")
-    else:
-        print(">> BŁĄD: Wzór Bineta dał zły wynik (problem precyzji float)")
+    try:
+        wynik_binet = fib_binet(n_input)
+        print(f"[Wzór Binet'a] Wynik: {wynik_binet}")
+    
+        if(wynik_binet == wynik_matrix):
+            print("Wzór Binet'a zgadza się z innymi wynikami")
+        else:
+            print("Błąd: Wzór Bineta dał zły wynik (problem precyzji float) (za duża luczba)")
+    except OverflowError:
+        print("[Wzór Bineta] Błąd: Liczba jest zbyt duża dla typu float")
