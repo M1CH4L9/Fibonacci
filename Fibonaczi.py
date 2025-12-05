@@ -77,8 +77,12 @@ if __name__ == "__main__":
     print("-" * 40)
 
     try:
+        start = time.perf_counter()
         wynik_binet = fib_binet(n_input)
+        end = time.perf_counter()
+        czas_binet = end - start
         print(f"[Wzór Binet'a] Wynik: {wynik_binet}")
+        print(f"Czas wykonania: {czas_binet:.10f} sekund\n")
     
         if(wynik_binet == wynik_matrix):
             print("Wzór Binet'a zgadza się z innymi wynikami")
@@ -86,3 +90,4 @@ if __name__ == "__main__":
             print("Błąd: Wzór Bineta dał zły wynik (problem precyzji float) (za duża luczba)")
     except OverflowError:
         print("[Wzór Bineta] Błąd: Liczba jest zbyt duża dla typu float")
+
